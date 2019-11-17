@@ -1,0 +1,474 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FaceLight</title>
+    <meta name="description" content="Healthcare">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
+
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+<% userProfile.forEach(function(entity) 
+{%>
+    <!-- Left Panel -->
+
+    <aside id="left-panel" class="left-panel">
+            <nav class="navbar navbar-expand-sm navbar-default">
+
+                    <div class="navbar-header">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <a class="navbar-brand" href="/index"><img src="img/team/<%=entity.blood%>.jpg" style="width: 50%; height: 50%" class="rounded-circle img-rounded"></a>
+                        <!-- <a class="navbar-brand hidden" href="/index"><img src="images/logo.png" alt="Logo"></a> -->
+                    </div>
+        
+                    <div id="main-menu" class="main-menu collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="unactive">
+                                <a href="/index"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                            </li>
+        
+                            <li class="active">
+                                <a href="/profile"> <i class="menu-icon fa fa-gears"></i>Profile </a>
+                            </li>
+        
+                            <% if(type == "patient"){ %>
+                            
+<!--                                 <li class="active">
+                                    <a href="/query"> <i class="menu-icon fa  fa-question"></i>Query </a>
+                                </li>
+        
+                                <li class="active">
+                                    <a href="/consent"> <i class="menu-icon fa fa-book"></i>Consent </a>
+                                </li>
+        
+                                <li class="active">
+                                    <a href="/timeline"> <i class="menu-icon fa fa-inbox"></i>Timeline </a>
+                                </li>
+        
+                                <li class="active">
+                                        <a href="/records"> <i class="menu-icon fa fa-file"></i>Record </a>
+                                </li> -->
+                                <li class="unactive">
+                                            <a href="/viewFiles"> <i class="menu-icon fa fa-file"></i>View Files </a>
+                                    </li>
+                                <% } else {%>
+                                    <!-- <li class="active">
+                                        <a href="/sendFiles"> <i class="menu-icon fa fa-inbox"></i>Send Files </a>
+                                    </li> -->
+            
+                                    <li class="unactive">
+                                            <a href="/viewFiles"> <i class="menu-icon fa fa-file"></i>View Files </a>
+                                    </li>
+                                <%}%>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <header id="header" class="header">
+
+            <div class="header-menu">
+
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="form-inline">
+                            <form class="search-form">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="img/team/<%=entity.blood%>.jpg" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="/index"><i class="fa fa-user"></i> My Profile</a>
+
+<!--                             <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a> -->
+
+                            <a class="nav-link" href="/profile"><i class="fa fa-cog"></i> Settings</a>
+
+                            <a class="nav-link" href="/signout"><i class="fa fa-power-off"></i> Logout</a>
+                        </div>
+                    </div>
+
+                    <div class="language-select dropdown" id="language-select">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
+                            <i class="flag-icon flag-icon-in"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="language">
+                            <div class="dropdown-item">
+                                <span class="flag-icon flag-icon-fr"></span>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-es"></i>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-us"></i>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-it"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </header><!-- /header -->
+        <!-- Header-->
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="/index">Dashboard</a></li>
+                            <li class="active">Profile</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+                    <div class="container col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong>Edit Profile</strong> 
+                            </div>
+                            <div class="card-body card-block">
+                                <form action="/editprofile" method="POST"  class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label class=" form-control-label">Static</label></div>
+                                        <div class="col-12 col-md-9">
+                                            <p class="form-control-static"><%=username%></p>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Name</label></div>
+                                        <div class="col-12 col-md-9"><input type="text" id="text-input" name="name" placeholder="Name" class="form-control"><small class="form-text text-muted">Please enter your name</small></div>
+                                    </div>
+                                    <div class="row form-group">
+                                                <div class="col col-md-3"><label for="select" class=" form-control-label">Select Profile pic</label></div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="blood" id="select" class="form-control">
+                                                        <option value="A+">Please select</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="AB-">AB-</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="O-">O-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Address</label></div>
+                                        <div class="col-12 col-md-9"><textarea name="address" id="textarea-input" rows="9" placeholder="Address..." class="form-control"></textarea></div>
+                                    </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="select" class=" form-control-label">Gender</label></div>
+                                            <div class="col-12 col-md-9">
+                                                <select name="gender" id="select" class="form-control">
+                                                    <option value="0">Please select</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label for="multiple-select" class=" form-control-label">Interest </label></div>
+                                            <div class="col col-md-9">
+                                                <select name="interests" id="multiple-select" multiple="" class="form-control">
+                                                    <option value="Cycling">Cycling</option>
+                                                    <option value="Jogging">Jogging</option>
+                                                    <option value="Yoga">Yoga</option>
+                                                    <option value="Heavy Exercise">Heavy Exercise</option>
+                                                    <option value="Moderate Exercise">Moderate Exercise</option>
+                                                    <option value="Light Exercise">Light Exercise</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="row form-group">
+                                            <div class="col col-md-3"><label class=" form-control-label">Active disease</label></div>
+                                            <div class="col col-md-9">
+                                                <div class="form-check-inline form-check">
+                                                    <label for="inline-radio1" class="form-check-label ">
+                                                        <input type="radio" id="inline-radio1" name="disease" value="option1" class="form-check-input">True
+                                                    </label>
+                                                    <label for="inline-radio2" class="form-check-label ">
+                                                        <input type="radio" id="inline-radio1" name="disease" value="option2" class="form-check-input">False
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                                <div class="col col-md-3"><label class=" form-control-label">Active Medication</label></div>
+                                                <div class="col col-md-9">
+                                                    <div class="form-check-inline form-check">
+                                                        <label for="inline-radio1" class="form-check-label ">
+                                                            <input type="radio" id="inline-radio2" name="medication" value="option1" class="form-check-input">True
+                                                        </label>
+                                                        <label for="inline-radio2" class="form-check-label ">
+                                                            <input type="radio" id="inline-radio2" name="medication" value="option2" class="form-check-input">False
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fa fa-dot-circle-o"></i> Submit
+                                </button>
+                                
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+
+                    
+
+
+
+                </div>
+
+            </div><!-- .animated -->
+        </div><!-- .content -->
+
+<% }); %>
+    </div><!-- /#right-panel -->
+    
+
+    <!-- Right Panel -->
+
+
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!--  Chart js -->
+    <script src="vendors/chart.js/dist/Chart.bundle.min.js"></script>
+    <script>
+        ( function ( $ ) {
+          "use strict";
+              //Sales chart
+      var ctx = document.getElementById( "sales-chart" );
+      ctx.height = 150;
+      var myChart = new Chart( ctx, {
+          type: 'line',
+          data: {
+              labels: [ "06-04-19", "06-04-19", "06-04-19", "06-04-19", "06-04-19", "06-04-19", "06-04-19" ],
+              type: 'line',
+              defaultFontFamily: 'Montserrat',
+              datasets: [ {
+                  label: "Actual",
+                  data: [ 20, 21, 22, 23, 24, 25, 26 ],
+                  backgroundColor: 'transparent',
+                  borderColor: 'rgba(220,53,69,0.75)',
+                  borderWidth: 3,
+                  pointStyle: 'circle',
+                  pointRadius: 5,
+                  pointBorderColor: 'transparent',
+                  pointBackgroundColor: 'rgba(220,53,69,0.75)',
+                      }, {
+                  label: "Your",
+                  data: [ 28, 29, 30, 29, 28, 29, 30 ],
+                  backgroundColor: 'transparent',
+                  borderColor: 'rgba(40,167,69,0.75)',
+                  borderWidth: 3,
+                  pointStyle: 'circle',
+                  pointRadius: 5,
+                  pointBorderColor: 'transparent',
+                  pointBackgroundColor: 'rgba(40,167,69,0.75)',
+                      } ]
+          },
+          options: {
+              responsive: true,
+  
+              tooltips: {
+                  mode: 'index',
+                  titleFontSize: 12,
+                  titleFontColor: '#000',
+                  bodyFontColor: '#000',
+                  backgroundColor: '#fff',
+                  titleFontFamily: 'Montserrat',
+                  bodyFontFamily: 'Montserrat',
+                  cornerRadius: 3,
+                  intersect: false,
+              },
+              legend: {
+                  display: false,
+                  labels: {
+                      usePointStyle: true,
+                      fontFamily: 'Montserrat',
+                  },
+              },
+              scales: {
+                  xAxes: [ {
+                      display: true,
+                      gridLines: {
+                          display: false,
+                          drawBorder: false
+                      },
+                      scaleLabel: {
+                          display: true,
+                          labelString: 'date'
+                      }
+                          } ],
+                  yAxes: [ {
+                      display: true,
+                      gridLines: {
+                          display: false,
+                          drawBorder: false
+                      },
+                      scaleLabel: {
+                          display: true,
+                          labelString: 'BMI'
+                      }
+                          } ]
+              },
+              title: {
+                  display: false,
+                  text: 'Normal Legend'
+              }
+          }
+      } );
+
+       //radar chart
+    var ctx = document.getElementById( "radarChart" );
+    ctx.height = 160;
+    var myChart = new Chart( ctx, {
+        type: 'radar',
+        data: {
+            labels: [ [ "Eating", "Dinner" ], [ "Drinking", "Water" ], "Sleeping", [ "Designing", "Graphics" ], "Medication", "Cycling", "Running" ],
+            datasets: [
+                {
+                    label: "Even day",
+                    data: [ 65, 59, 66, 45, 56, 55, 40 ],
+                    borderColor: "rgba(0, 123, 255, 0.6)",
+                    borderWidth: "1",
+                    backgroundColor: "rgba(0, 123, 255, 0.4)"
+                            },
+                {
+                    label: "Odd Day",
+                    data: [ 28, 12, 40, 19, 63, 27, 87 ],
+                    borderColor: "rgba(0, 123, 255, 0.7",
+                    borderWidth: "1",
+                    backgroundColor: "rgba(0, 123, 255, 0.5)"
+                            }
+                        ]
+        },
+        options: {
+            legend: {
+                position: 'top'
+            },
+            scale: {
+                ticks: {
+                    beginAtZero: true
+                }
+            }
+        }
+    } );
+
+        //bar chart
+        var ctx = document.getElementById( "barChart" );
+    //    ctx.height = 200;
+    var myChart = new Chart( ctx, {
+        type: 'bar',
+        data: {
+            labels: [ "January", "February", "March", "April", "May", "June", "July" ],
+            datasets: [
+                {
+                    label: "BMI Actual",
+                    data: [ 65, 59, 80, 81, 56, 55, 40 ],
+                    borderColor: "rgba(0, 123, 255, 0.9)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(0, 123, 255, 0.5)"
+                            },
+                {
+                    label: "BMI Expected",
+                    data: [ 28, 48, 40, 19, 86, 27, 90 ],
+                    borderColor: "rgba(0,0,0,0.09)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(0,0,0,0.07)"
+                            }
+                        ]
+        },
+        options: {
+            scales: {
+                yAxes: [ {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                                } ]
+            }
+        }
+    } );
+
+    
+  } )( jQuery );
+        </script>
+    <!-- <script src="assets/js/init-scripts/chart-js/chartjs-init.js"></script> -->
+
+</body>
+
+</html>

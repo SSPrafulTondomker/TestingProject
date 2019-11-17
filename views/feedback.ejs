@@ -1,0 +1,103 @@
+<% include partials/header %>
+<% include partials/navbar %>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+          <li class="nav-item " id="dashboard">
+            <a class="nav-link" href="/">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span >Dashboard</span>
+            </a>
+          </li>
+          <% if ( type[0].type == 'admin' ) { %>
+             <li class="nav-item dropdown" id="admin">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-fw fa-folder"></i>
+              <span >Admin</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+              <h6 class="dropdown-header">Admin Mode:</h6>
+              <a class="dropdown-item" href="/userslist">Userslist</a>
+              <a class="dropdown-item" href="/privilege">Privileges</a> 
+              <a class="dropdown-item" href="/generateXlsx">Generate Xlsx</a> 
+            </div>
+          </li>
+          <% } %>
+          <li class="nav-item " id="complaint">
+              <a class="nav-link" href="/complaint">
+                <i class="fas fa-comment-alt"></i>
+                <span >Complaint</span></a>
+          </li>
+          <li class="nav-item " id="profile">
+              <a class="nav-link" href="/profile">
+                <i class="fas fa-address-book"></i>
+                <span >Profile</span></a>
+          </li>
+          <li class="nav-item active" id="feedback">
+                <a class="nav-link" href="/feedback">
+                  <i class="fas fa-comment"></i>
+                  <span >Feed Back</span></a>
+        </li>
+        </ul>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="/">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Feed Back</li>
+          </ol>
+
+          <!-- Page Content -->
+          <h1>Feedback page</h1>
+          <hr>
+          <div class="container">
+            <div class="card card-register mx-auto mt-5">
+              <div class="card-header">Send a Suggestions</div>
+              <div class="card-body">
+                <form action="/feedback" method="POST">
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="text" name="subject" id="subject" class="form-control" placeholder="subject" required="required">
+                      <label for="subject">Subject</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                        <div class="form-label-group">
+                          <textarea type="input" rows="5" name="complaint" id="complaint" class="form-control" placeholder="complaint" required="required"></textarea>
+                        </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block ">send</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <hr>  
+        </div>
+        
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <% include partials/copyright %>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <% include partials/logout %>
+
+<% include partials/footer %>

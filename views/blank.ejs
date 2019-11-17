@@ -1,0 +1,105 @@
+<% include partials/header %>
+<% include partials/navbar %>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <% include partials/sidebar %>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Complaint Page</li>
+          </ol>
+
+          <!-- Page Content -->
+          <h1>Complaint page</h1>
+          <hr>
+          <div class="container">
+            <div class="card card-register mx-auto mt-5">
+              <div class="card-header">send a request/complaint</div>
+              <div class="card-body">
+                <form action="/complaint" method="POST">
+                  <!-- <div class="form-group">
+                    <div class="form-row">
+                      <div class="col-md-6">
+                        <div class="form-label-group">
+                          <input type="text" name="username" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus">
+                          <label for="firstName">First name</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-label-group">
+                          <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required">
+                          <label for="lastName">Last name</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="required">
+                      <label for="inputEmail">subject</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                        <div class="form-label-group">
+                          <textarea type="input" rows="5" name="password" id="inputPassword" class="form-control" placeholder="Password" required="required"></textarea>
+                        </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block " >send</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <hr>  
+        </div>
+        
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% include partials/footer %>

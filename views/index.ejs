@@ -1,0 +1,666 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>FaceLight</title>
+    <meta name="description" content="SEM-7">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
+
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+<% userProfile.forEach(function(entity) 
+{%>
+    <!-- Left Panel -->
+
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/index"><img src="img/team/<%=entity.blood%>.jpg" style="width: 50%; height: 50%" class="rounded-circle img-rounded"></a>
+                <!-- <a class="navbar-brand hidden" href="/index"><img src="images/logo.png" alt="Logo"></a> -->
+            </div>
+
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/index"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                    </li>
+
+                    <li class="unactive">
+                        <a href="/profile"> <i class="menu-icon fa fa-gears"></i>Profile </a>
+                    </li>
+
+                    <% if(type == "patient"){ %>
+                    
+                        <!-- <li class="active">
+                            <a href="/query"> <i class="menu-icon fa  fa-question"></i>Query </a>
+                        </li>
+
+                        <li class="active">
+                            <a href="/consent"> <i class="menu-icon fa fa-book"></i>Consent </a>
+                        </li>
+
+                        <li class="active">
+                            <a href="/timeline"> <i class="menu-icon fa fa-inbox"></i>Timeline </a>
+                        </li>
+
+                        <li class="active">
+                                <a href="/records"> <i class="menu-icon fa fa-file"></i>Record </a>
+                        </li> -->
+                        <!-- <li class="active">
+                                <a href="/sendFiles"> <i class="menu-icon fa fa-inbox"></i>Send Files </a>
+                            </li> -->
+    
+                            <li class="unactive">
+                                    <a href="/viewFiles"> <i class="menu-icon fa fa-file"></i>View Files </a>
+                            </li>
+                        
+                        <% } else {%>
+                            <!-- <li class="active">
+                                <a href="/sendFiles"> <i class="menu-icon fa fa-inbox"></i>Send Files </a>
+                            </li> -->
+    
+                            <li class="unactive">
+                                    <a href="/viewFiles"> <i class="menu-icon fa fa-file"></i>View Files </a>
+                            </li>
+                        <%}%>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside><!-- /#left-panel -->
+
+    <!-- Left Panel -->
+
+    <!-- Right Panel -->
+
+    <div id="right-panel" class="right-panel">
+
+        <!-- Header-->
+        <header id="header" class="header">
+
+            <div class="header-menu">
+
+                <div class="col-sm-7">
+                    <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
+                    <div class="header-left">
+                        <button class="search-trigger"><i class="fa fa-search"></i></button>
+                        <div class="form-inline">
+                            <form class="search-form">
+                                <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+                    <div class="user-area dropdown float-right">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="img/team/<%=entity.blood%>.jpg" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a class="nav-link" href="/index"><i class="fa fa-user"></i> My Profile</a>
+
+                            <!-- <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a> -->
+
+                            <a class="nav-link" href="/profile"><i class="fa fa-cog"></i> Settings</a>
+
+                            <a class="nav-link" href="/signout"><i class="fa fa-power-off"></i> Logout</a>
+                        </div>
+                    </div>
+
+                    <div class="language-select dropdown" id="language-select">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"  id="language" aria-haspopup="true" aria-expanded="true">
+                            <i class="flag-icon flag-icon-in"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="language">
+                            <div class="dropdown-item">
+                                <span class="flag-icon flag-icon-fr"></span>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-es"></i>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-us"></i>
+                            </div>
+                            <div class="dropdown-item">
+                                <i class="flag-icon flag-icon-it"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </header><!-- /header -->
+        <!-- Header-->
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">Dashboard</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container ">
+            <div class="row">
+            <!--alert-->
+            <div class="col align-self-start">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                    <span class="badge badge-pill badge-success">Success</span> You have successfully Logged in your account 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                        <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong class="card-title mb-3">Profile Card</strong>
+                                    </div>
+                                    
+                                    <div class="card-body">
+                                        <div class="mx-auto d-block">
+                                            <img class="rounded-circle mx-auto d-block" src="img/team/<%=entity.blood%>.jpg" alt="Card image cap">
+                                            <h5 class="text-sm-center mt-2 mb-1"><%=entity.username%></h5>
+                                            <div class="location text-sm-center"><i class="fa fa-map-marker"></i> Allahabad, India</div>
+                                        </div>
+                                        <hr>
+                                        <div class="col align-self-center">
+                                                <div class="card">
+                                                        <div class="card-header">
+                                                            <strong class="card-title">Profile</strong>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table ">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Name</th>
+                                                                        <td><%=entity.firstname%></td>
+                                                                        
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Gender</th>
+                                                                        <td><%=entity.gender%></td> 
+                                                                    </tr>
+                                                                    
+                                                                        
+                                                                            
+                                                                                <tr>
+                                                                                        <th scope="row">Active Medication</th>
+                                                                                        <td><%=entity.medication%></td> 
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                            <th scope="row">Active disease</th>
+                                                                                            <td><%=entity.disease%></td> 
+                                                                                        </tr>
+                                                                    <tr>
+                                                                            <th scope="row">Address</th>
+                                                                            <td><%=entity.address%></td> 
+                                                                        </tr>
+                                                                        <% }); %>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                        </div>
+                                        <div class="card-text text-sm-center">
+                                            <a href="#"><i class="fa fa-facebook pr-1"></i></a>
+                                            <a href="#"><i class="fa fa-twitter pr-1"></i></a>
+                                            <a href="#"><i class="fa fa-linkedin pr-1"></i></a>
+                                            <a href="#"><i class="fa fa-pinterest pr-1"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="mb-3">Per day records</h4>
+                                            <canvas id="sales-chart"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                            <div class="card-body">
+                                                <h4 class="mb-3">Activity</h4>
+                                                <canvas id="radarChart"></canvas>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="mb-3">History</h4>
+                                                    <canvas id="barChart"></canvas>
+                                                </div>
+                                            </div>
+                                </div>
+                               
+                                <!--alert ends-->
+            <!-- <div class="container ">
+                <div class="row">
+        
+        <div class="col-lg-6">
+                <% if(type == "patient"){ %>
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title">Active Diseases</strong>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Problem</th>
+                                <th scope="col">Last date</th>
+                                <th scope="col">End date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Malaria</td>
+                                <td>04-04-19</td>
+                                <td>10-04-19</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Dengue</td>
+                                <td>15-04-19</td>
+                                <td>20-04-19</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Pox</td>
+                                <td>21-04-19</td>
+                                <td>25-04-19</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        <% } else {%>
+            
+                <% } %>
+        </div> -->
+<!--                 <div class="col-lg-6">
+                        <% if(type == "patient"){ %>
+                        <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">Active Medication</strong>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Medication</th>
+                                                <th scope="col">Dostage</th>
+                                                <th scope="col">Duration</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Paracetamol</td>
+                                                <td>Twice</td>
+                                                <td>8 weeks</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Crocin</td>
+                                                <td>Thrice</td>
+                                                <td>8 weeks</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Drug</td>
+                                                <td>one time</td>
+                                                <td>10 weeks</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+    
+                                </div>
+                            </div>
+                        <%} else { %>
+                            
+                        <%}%>
+                </div> -->
+        <!--query ends--->
+
+<!--         </div> 
+    </div> -->
+
+<!--     <div class="container">
+        <div class="row">
+            <div class="col align-self-center">
+                    <% if (type == "patient") { %>
+                        <div class="card">
+                                <div class="card-header">
+                                    <strong class="card-title">Medication side effects</strong>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Side effect 1</th>
+                                                <th scope="col">side effect 2</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>@twitter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <% }else { %>
+                            
+                            <%}%>
+            </div>
+        </div>
+    </div> -->
+                                </div>
+                                </div>
+                                </div>
+            
+        
+    </div><!-- /#right-panel -->
+
+    <!-- Right Panel -->
+
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
+    <script src="vendors/chart.js/dist/Chart.bundle.min.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/widgets.js"></script>
+    <script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
+    <script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script>
+        (function($) {
+            "use strict";
+
+            jQuery('#vmap').vectorMap({
+                map: 'world_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#1de9b6',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: ['#1de9b6', '#03a9f5'],
+                normalizeFunction: 'polynomial'
+            });
+        })(jQuery);
+    </script>
+    <script>
+        ( function ( $ ) {
+          "use strict";
+              //Sales chart
+      var ctx = document.getElementById( "sales-chart" );
+      ctx.height = 150;
+      var dates = '<%- userProfile[0].inday%>';
+    var dateString = "";
+    var dateList = [];
+
+    for (var i= 0; i < dates.length;i++){
+        if (dates[i] == ",")
+        {
+            dateList.push(dateString);
+            dateString = "";
+        }else {
+        dateString = dateString.concat(dates[i]);
+        }
+    }
+    dateList.push(dateString);
+
+    var freqDates = {}
+
+    for (var i = 0; i < dateList.length; i++){
+        if (typeof freqDates[dateList[i]] == 'undefined') {
+                freqDates[dateList[i]] = 1;
+              } else {
+                freqDates[dateList[i]] += 1;
+              }
+    }
+    var uniqueDates = [];
+    var uniqueFreq = [];
+    for (var i in freqDates){
+        uniqueDates.push(i);
+        uniqueFreq.push(freqDates[i]);
+    }
+    // alert(uniqueDates);
+      var myChart = new Chart( ctx, {
+          type: 'line',
+          data: {
+              labels: uniqueDates,
+              type: 'line',
+              defaultFontFamily: 'Montserrat',
+              datasets: [ {
+                  label: "Actual",
+                  data: uniqueFreq,
+                  backgroundColor: 'transparent',
+                  borderColor: 'rgba(220,53,69,0.75)',
+                  borderWidth: 3,
+                  pointStyle: 'circle',
+                  pointRadius: 5,
+                  pointBorderColor: 'transparent',
+                  pointBackgroundColor: 'rgba(220,53,69,0.75)',
+                      } ]
+          },
+          options: {
+              responsive: true,
+  
+              tooltips: {
+                  mode: 'index',
+                  titleFontSize: 12,
+                  titleFontColor: '#000',
+                  bodyFontColor: '#000',
+                  backgroundColor: '#fff',
+                  titleFontFamily: 'Montserrat',
+                  bodyFontFamily: 'Montserrat',
+                  cornerRadius: 3,
+                  intersect: false,
+              },
+              legend: {
+                  display: false,
+                  labels: {
+                      usePointStyle: true,
+                      fontFamily: 'Montserrat',
+                  },
+              },
+              scales: {
+                  xAxes: [ {
+                      display: true,
+                      gridLines: {
+                          display: false,
+                          drawBorder: false
+                      },
+                      scaleLabel: {
+                          display: true,
+                          labelString: 'date'
+                      }
+                          } ],
+                  yAxes: [ {
+                      display: true,
+                      gridLines: {
+                          display: false,
+                          drawBorder: false
+                      },
+                      scaleLabel: {
+                          display: true,
+                          labelString: 'BMI'
+                      }
+                          } ]
+              },
+              title: {
+                  display: false,
+                  text: 'Normal Legend'
+              }
+          }
+      } );
+
+       //radar chart
+    var interest = '<%- userProfile[0].interest%>';
+    var interestString = "";
+    var interestList = [];
+
+    for (var i= 0; i < interest.length;i++){
+        if (interest[i] == ",")
+        {
+            interestList.push(interestString);
+            interestString = "";
+        }else {
+        interestString = interestString.concat(interest[i]);
+        }
+    }
+    interestList.push(interestString);
+    
+    var ctx = document.getElementById( "radarChart" );
+    ctx.height = 160;
+    var myChart = new Chart( ctx, {
+        type: 'radar',
+        data: {
+            labels: interestList,
+            datasets: [
+                {
+                    label: "Even day",
+                    data: [ 65, 59, 66, 45, 56, 55, 40 ],
+                    borderColor: "rgba(0, 123, 255, 0.6)",
+                    borderWidth: "1",
+                    backgroundColor: "rgba(0, 123, 255, 0.4)"
+                            },
+                {
+                    label: "Odd Day",
+                    data: [ 28, 12, 40, 19, 63, 27, 87 ],
+                    borderColor: "rgba(0, 123, 255, 0.7",
+                    borderWidth: "1",
+                    backgroundColor: "rgba(0, 123, 255, 0.5)"
+                            }
+                        ]
+        },
+        options: {
+            legend: {
+                position: 'top'
+            },
+            scale: {
+                ticks: {
+                    beginAtZero: true
+                }
+            }
+        }
+    } );
+
+        //bar chart
+        var ctx = document.getElementById( "barChart" );
+    //    ctx.height = 200;
+    var myChart = new Chart( ctx, {
+        type: 'bar',
+        data: {
+            labels: [ "January", "February", "March", "April", "May", "June", "July" ],
+            datasets: [
+                {
+                    label: "BMI Actual",
+                    data: [ 65, 59, 80, 81, 56, 55, 40 ],
+                    borderColor: "rgba(0, 123, 255, 0.9)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(0, 123, 255, 0.5)"
+                            },
+                {
+                    label: "BMI Expected",
+                    data: [ 28, 48, 40, 19, 86, 27, 90 ],
+                    borderColor: "rgba(0,0,0,0.09)",
+                    borderWidth: "0",
+                    backgroundColor: "rgba(0,0,0,0.07)"
+                            }
+                        ]
+        },
+        options: {
+            scales: {
+                yAxes: [ {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                                } ]
+            }
+        }
+    } );
+
+    
+  } )( jQuery );
+        </script>
+
+</body>
+
+</html>
