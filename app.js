@@ -20,16 +20,9 @@ mongoose.connect(process.env.DB_LINK, { useNewUrlParser: true });
 var index = require('./routes/index'),
   users = require('./routes/users'),
   auth = require('./routes/auth')(passport),
-  complaint = require('./routes/complaint'),
   profile = require('./routes/profile'),
-  feedback = require('./routes/feedback'),
-  xlsx = require('./routes/xlsx'),
-  privilege = require('./routes/privilege'),
   edit = require('./routes/editprofile'),
-  posts = require('./routes/posts'),
-  consent = require('./routes/consent'),
-  records = require('./routes/records'),
-  userslist = require('./routes/userslist');
+  posts = require('./routes/posts');
 
 var app = express();
 
@@ -55,15 +48,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use('/', records);
-app.use('/', consent);
+
 app.use('/', posts);
-app.use('/', privilege);
 app.use('/', edit);
-app.use('/', complaint);
-app.use('/', userslist);
-app.use('/', feedback);
-app.use('/', xlsx);
 app.use('/', profile);
 app.use('/', index);
 app.use('/', users);

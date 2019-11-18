@@ -5,8 +5,8 @@ var express = require('express');
     fs = require('fs'),
     bcrypt = require('bcrypt-nodejs'),
     mongoose = require('mongoose'),
-    mongoXlsx = require('mongo-xlsx'),
-    filepreview = require('filepreview');
+    mongoXlsx = require('mongo-xlsx');
+    // filepreview = require('filepreview');
 
 var userList = require('../db/User'),
     complaintList = require('../db/complaint'),
