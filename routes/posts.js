@@ -55,6 +55,111 @@ router.post("/index", upload.any(), function(req, res){
     });
 });
 
+router.post("/entryPerson", function(req, res){
+    var inPerson = req.body.medication;
+    var today = new Date();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            
+        
+            profileList.find({username: inPerson}, function(err, patientProfile){
+                var intime = patientProfile[0].in;
+                var out = patientProfile[0].out;
+                if (!intime){
+                    profileList.findOneAndUpdate({username: inPerson},
+                        {
+                            $push: {inday : date},
+                            in : true
+                        }
+                        , {upsert: true}, function(err, newCreate){
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            profileList.findOneAndUpdate({username: inPerson},
+                            {
+                                $push: {intime : time},
+                                in : true
+                            }
+                            ,{upsert: true}, function(err, newCreate){
+                                if (err){
+                                    console.log(err);
+                                }else{
+                                    res.redirect('/login');
+                                }
+
+                            });
+                            
+                        }
+                    });
+                }else{
+                    profileList.findOneAndUpdate({username: inPerson},
+                        {
+                            $push: {outday : date},
+                            in : false
+                        }
+                        , {upsert: true}, function(err, newCreate){
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            profileList.findOneAndUpdate({username: inPerson},
+                            {
+                                $push: {outtime : time},
+                                in : false
+                            }
+                            ,{upsert: true}, function(err, newCreate){
+                                if (err){
+                                    console.log(err);
+                                }else{
+                                    res.redirect('/login');
+                                }
+
+                            });
+                        }
+                    });
+                }
+
+            });
+});
+
+router.post("/intrudorFile", upload.any(), function(req, res){
+            var patient = 'intrudor';
+            var filename = req.files[0].filename;
+                var today = new Date();
+                console.log(filename);
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            profileList.findOneAndUpdate({username: patient},
+                {
+                    $push: {records : filename}
+                }
+                , {upsert: true}, function(err, newCreate){
+                if(err){
+                    console.log(err);
+                }
+                else{
+                    profileList.findOneAndUpdate({username: patient}, 
+                    {
+                        $push: {inday: date}
+                    }
+                    ,{upsert: true}, function (err, newCreate){
+                        if (err){
+                            console.log(err);
+                        }else {
+                            profileList.findOneAndUpdate({username: patient}, 
+                                {
+                                    $push: {intime: time}
+                                }, {upsert: true}, function (err, newCreate){
+                                                        res.redirect('/login');
+                            });
+                        }
+
+                    });
+
+                }
+            });
+});
 router.post("/fileSend", upload.any(), function(req, res){
 
     var filename = "";
@@ -63,7 +168,7 @@ router.post("/fileSend", upload.any(), function(req, res){
     }
     var patient = "intrudor";
     var inPerson = req.body.medication;
-    var doctor = req.user.username;
+    //var doctor = req.user.username;
 
     console.log(filename);
 
