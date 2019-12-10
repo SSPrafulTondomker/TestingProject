@@ -45,7 +45,7 @@ module.exports = function (passport) {
 		            record.mail = mail;
                     record.password = record.hashPassword(password);
                     record.token = secretToken;
-                    record.activate = false;
+                    record.activate = true;
                     record.type = type;
 
                     var profile = new profileList({
